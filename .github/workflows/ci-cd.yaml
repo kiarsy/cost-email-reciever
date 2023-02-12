@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - develop
 env:
   PROJECT_ID: sonic-cat-363104
   IMAGE_NAME: email-parser

@@ -15,13 +15,17 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-
       # Setup gcloud CLI
-      - uses: 'google-github-actions/setup-gcloud@v1'
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: "290.0.1"
-          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+            version: '275.0.0'
+            service_account_email: ${{ secrets.SA_EMAIL }}
+            service_account_key: ${{ secrets.GCP_SA_KEY_JSON}}
+
+      # Configure gcloud CLI
+      - name: gcloud Set up
+        run: |
+            gcloud config set project $PROJECT_ID
 
       # Build and push image to Google Container Registry
       - name: Build
